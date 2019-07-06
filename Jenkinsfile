@@ -1,13 +1,13 @@
 pipeline {
   agent any
   
-	 
+/*	 
   	def myRepo = checkout scm
 	def gitCommit = myRepo.GIT_COMMIT
 	def gitBranch = myRepo.GIT_BRANCH
 	def shortGitCommit = "${gitCommit[0..10]}"
 	def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
-
+*/
 	
 	stages {
     
@@ -39,7 +39,8 @@ pipeline {
     stage('testing github branch') {
 
 	         // fetching from SCM:
-            echo "$myRepo.GIT_BRANCH"
+            def myRepo = checkout scm
+	    echo "$myRepo.GIT_BRANCH"
             echo gitBranch
             echo "$gitBranch"
         	git branch: 'video53',
