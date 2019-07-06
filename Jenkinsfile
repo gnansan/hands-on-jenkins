@@ -1,5 +1,10 @@
 pipeline {
   agent any
+
+	
+	stages {
+    
+	  stage('checkout SCM') {
   
 /*	 
   	def myRepo = checkout scm
@@ -8,13 +13,24 @@ pipeline {
 	def shortGitCommit = "${gitCommit[0..10]}"
 	def previousGitCommit = sh(script: "git rev-parse ${gitCommit}~", returnStdout: true)
 */
-	
-	stages {
-    
-   
+		  
+		  
+		  // fetching from SCM:
+            def myRepo = checkout scm
+	    echo "$myRepo.GIT_BRANCH"
+            echo gitBranch
+            echo "$gitBranch"
+        	git branch: 'video53',
+          url: 'https://github.com/gnansan/hands-on-jenkins.git',
+          sh 'ls -lath'
+	  }
+		
+		
+		
     stage('Build') {
       steps {
         echo 'Building...'
+	      
       }
     }
     stage('Test') {
@@ -36,18 +52,7 @@ pipeline {
         }
       }
     }
-    stage('testing github branch') {
-
-	         // fetching from SCM:
-            def myRepo = checkout scm
-	    echo "$myRepo.GIT_BRANCH"
-            echo gitBranch
-            echo "$gitBranch"
-        	git branch: 'video53',
-          url: 'https://github.com/gnansan/hands-on-jenkins.git',
-          sh 'ls -lath'
- 
-	    
+    stage('testing github branch') {   
 	    steps {
         echo 'Deploy'
       }
