@@ -15,7 +15,7 @@ pipeline {
             echo "$myRepo.GIT_BRANCH"
             echo gitBranch
             echo "$gitBranch"
-        	git branch: '$gitBranch',
+        	git branch: 'video53',
           url: 'https://github.com/gnansan/hands-on-jenkins.git',
           sh 'ls -lath'
       steps {
